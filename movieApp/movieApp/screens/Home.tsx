@@ -15,7 +15,7 @@ export default function Home(): JSX.Element {
     const [familyMovies, setFamilyMovies] = useState<Movie[]>([])
     const [documentaries, setDocumentaries] = useState<Movie[]>([])
     const [popularTvShows, setPopularTvShows] = useState<TVShow[]>([])
-    const [error, setError] = useState<Error | undefined>({ name: "Network failure", message: "Contact your Internet provider" })
+    const [error, setError] = useState<Error | undefined>(undefined)
     const [loaded, setLoaded] = useState(false)
 
     const getData = () => {
