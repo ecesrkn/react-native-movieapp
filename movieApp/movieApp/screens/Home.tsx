@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Image, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { getDocumentaries, getFamilyMovies, getPopularMovies, getPopularTvShows, getUpcomingMovies } from "../data/services";
 import { Movie, TVShow } from "../data/types";
 import Swiper from "react-native-swiper";
@@ -15,6 +15,7 @@ export default function Home(): JSX.Element {
     const [documentaries, setDocumentaries] = useState<Movie[]>([])
     const [popularTvShows, setPopularTvShows] = useState<TVShow[]>([])
     const [error, setError] = useState<Error | undefined>(undefined)
+    const [loaded, setLoaded] = useState(false)
 
     const getData = () => {
         return Promise.all([
@@ -45,6 +46,7 @@ export default function Home(): JSX.Element {
                     setPopularTvShows(popularTvShowsData)
                     setFamilyMovies(familyMoviesData)
                     setDocumentaries(documentariesData)
+                    setLoaded(true)
                 })
                 .catch((err: Error) =>
                     setError(err))
@@ -57,53 +59,62 @@ export default function Home(): JSX.Element {
 
     return (
         <>
-            <ScrollView>
-                {moviesImages && (
-                    <View style={styles.sliderContainer} >
-                        <Swiper
-                            autoplay
-                            height={dimensions.height / 1.5}
-                            style={styles.swiper}
-                            dotStyle={styles.noDot}
-                            activeDotStyle={styles.noDot} >
+            {loaded ?
+                <ScrollView>
+                    {/* Upcoming Movies - Big Swiper */}
+                    {moviesImages && (
+                        <View style={styles.sliderContainer} >
+                            <Swiper
+                                autoplay
+                                height={dimensions.height / 1.5}
+                                style={styles.swiper}
+                                dotStyle={styles.noDot}
+                                activeDotStyle={styles.noDot} >
 
-                            {moviesImages.map(image => {
-                                return (
-                                    <Image
-                                        key={image}
-                                        source={{ uri: image }}
-                                        style={styles.poster} />
-                                )
-                            })}
-                        </Swiper>
-                    </View>
-                )}
-                {popularMovies && (
-                    <View style={styles.carousel} >
-                        <MovieList title={"Popular movies"} content={popularMovies} />
-                    </View>
-                )}
-                {popularTvShows && (
-                    <View style={styles.carousel} >
-                        <TvShowList title={"Popular TV shows"} content={popularTvShows} />
-                    </View>
-                )}
-                {familyMovies && (
-                    <View style={styles.carousel} >
-                        <MovieList title={"Family movies"} content={familyMovies} />
-                    </View>
-                )}
-                {documentaries && (
-                    <View style={styles.carousel} >
-                        <MovieList title={"Documentaries"} content={documentaries} />
-                    </View>
-                )}
+                                {moviesImages.map(image => {
+                                    return (
+                                        <Image
+                                            key={image}
+                                            source={{ uri: image }}
+                                            style={styles.poster} />
+                                    )
+                                })}
+                            </Swiper>
+                        </View>
+                    )}
+                    {/* Popular Movies */}
+                    {popularMovies && (
+                        <View style={styles.carousel} >
+                            <MovieList title={"Popular movies"} content={popularMovies} />
+                        </View>
+                    )}
+                    {/* Popular TV Shows */}
+                    {popularTvShows && (
+                        <View style={styles.carousel} >
+                            <TvShowList title={"Popular TV shows"} content={popularTvShows} />
+                        </View>
+                    )}
+                    {/* Family Movies */}
+                    {familyMovies && (
+                        <View style={styles.carousel} >
+                            <MovieList title={"Family movies"} content={familyMovies} />
+                        </View>
+                    )}
+                    {/* Documentaries */}
+                    {documentaries && (
+                        <View style={styles.carousel} >
+                            <MovieList title={"Documentaries"} content={documentaries} />
+                        </View>
+                    )}
 
 
 
-            </ScrollView>
-
-
+                </ScrollView>
+                :
+                <View style={styles.loadingIndicator}>
+                    <ActivityIndicator size="large" color={"pink"} />
+                </View>
+            }
         </>
 
     );
@@ -129,5 +140,10 @@ const styles = StyleSheet.create({
     },
     noDot: {
         height: 0
+    },
+    loadingIndicator: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
