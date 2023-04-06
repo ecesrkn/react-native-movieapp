@@ -5,7 +5,7 @@ type ErrorProps = {
     message2: string
 }
 
-export default function Error({ message1, message2 }: ErrorProps) {
+export default function ErrorPage({ message1, message2 }: ErrorProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{message1}</Text>

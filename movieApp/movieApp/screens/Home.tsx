@@ -4,6 +4,7 @@ import { getDocumentaries, getFamilyMovies, getPopularMovies, getPopularTvShows,
 import { Movie, TVShow } from "../data/types";
 import Swiper from "react-native-swiper";
 import { MovieList, TvShowList } from "../components/List";
+import ErrorPage from "../components/Error";
 
 const dimensions = Dimensions.get("screen")
 
@@ -14,7 +15,7 @@ export default function Home(): JSX.Element {
     const [familyMovies, setFamilyMovies] = useState<Movie[]>([])
     const [documentaries, setDocumentaries] = useState<Movie[]>([])
     const [popularTvShows, setPopularTvShows] = useState<TVShow[]>([])
-    const [error, setError] = useState<Error | undefined>(undefined)
+    const [error, setError] = useState<Error | undefined>({ name: "Network failure", message: "Contact your Internet provider" })
     const [loaded, setLoaded] = useState(false)
 
     const getData = () => {
@@ -59,62 +60,65 @@ export default function Home(): JSX.Element {
 
     return (
         <>
-            {loaded ?
-                <ScrollView>
-                    {/* Upcoming Movies - Big Swiper */}
-                    {moviesImages && (
-                        <View style={styles.sliderContainer} >
-                            <Swiper
-                                autoplay
-                                height={dimensions.height / 1.5}
-                                style={styles.swiper}
-                                dotStyle={styles.noDot}
-                                activeDotStyle={styles.noDot} >
+            {error
+                ? <ErrorPage message1={error.name} message2={error.message} />
+                : <>
+                    {loaded
+                        ? <ScrollView>
+                            {/* Upcoming Movies - Big Swiper */}
+                            {moviesImages && (
+                                <View style={styles.sliderContainer} >
+                                    <Swiper
+                                        autoplay
+                                        height={dimensions.height / 1.5}
+                                        style={styles.swiper}
+                                        dotStyle={styles.noDot}
+                                        activeDotStyle={styles.noDot} >
 
-                                {moviesImages.map(image => {
-                                    return (
-                                        <Image
-                                            key={image}
-                                            source={{ uri: image }}
-                                            style={styles.poster} />
-                                    )
-                                })}
-                            </Swiper>
-                        </View>
-                    )}
-                    {/* Popular Movies */}
-                    {popularMovies && (
-                        <View style={styles.carousel} >
-                            <MovieList title={"Popular movies"} content={popularMovies} />
-                        </View>
-                    )}
-                    {/* Popular TV Shows */}
-                    {popularTvShows && (
-                        <View style={styles.carousel} >
-                            <TvShowList title={"Popular TV shows"} content={popularTvShows} />
-                        </View>
-                    )}
-                    {/* Family Movies */}
-                    {familyMovies && (
-                        <View style={styles.carousel} >
-                            <MovieList title={"Family movies"} content={familyMovies} />
-                        </View>
-                    )}
-                    {/* Documentaries */}
-                    {documentaries && (
-                        <View style={styles.carousel} >
-                            <MovieList title={"Documentaries"} content={documentaries} />
-                        </View>
-                    )}
+                                        {moviesImages.map(image => {
+                                            return (
+                                                <Image
+                                                    key={image}
+                                                    source={{ uri: image }}
+                                                    style={styles.poster} />
+                                            )
+                                        })}
+                                    </Swiper>
+                                </View>
+                            )}
+                            {/* Popular Movies */}
+                            {popularMovies && (
+                                <View style={styles.carousel} >
+                                    <MovieList title={"Popular movies"} content={popularMovies} />
+                                </View>
+                            )}
+                            {/* Popular TV Shows */}
+                            {popularTvShows && (
+                                <View style={styles.carousel} >
+                                    <TvShowList title={"Popular TV shows"} content={popularTvShows} />
+                                </View>
+                            )}
+                            {/* Family Movies */}
+                            {familyMovies && (
+                                <View style={styles.carousel} >
+                                    <MovieList title={"Family movies"} content={familyMovies} />
+                                </View>
+                            )}
+                            {/* Documentaries */}
+                            {documentaries && (
+                                <View style={styles.carousel} >
+                                    <MovieList title={"Documentaries"} content={documentaries} />
+                                </View>
+                            )}
 
 
 
-                </ScrollView>
-                :
-                <View style={styles.loadingIndicator}>
-                    <ActivityIndicator size="large" color={"pink"} />
-                </View>
-            }
+                        </ScrollView>
+                        : <View style={styles.loadingIndicator}>
+                            <ActivityIndicator size="large" color={"pink"} />
+                        </View>
+                    }
+                </>}
         </>
 
     );
