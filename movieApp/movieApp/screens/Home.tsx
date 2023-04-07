@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getDocumentaries, getFamilyMovies, getPopularMovies, getPopularTvShows, getUpcomingMovies } from "../data/services";
 import { Movie, TVShow } from "../data/types";
 import Swiper from "react-native-swiper";
 import { MovieList, TvShowList } from "../components/List";
 import ErrorPage from "../components/Error";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigation";
 
 const dimensions = Dimensions.get("screen")
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
-export default function Home(): JSX.Element {
+export default function Home({ navigation }: Props): JSX.Element {
 
     const [moviesImages, setMoviesImages] = useState<string[]>([])
     const [popularMovies, setPopularMovies] = useState<Movie[]>([])
@@ -95,19 +98,19 @@ export default function Home(): JSX.Element {
                             {/* Popular TV Shows */}
                             {popularTvShows && (
                                 <View style={styles.carousel} >
-                                    <TvShowList title={"Popular TV shows"} content={popularTvShows} />
+                                    <TvShowList title={"Popular TV shows"} content={popularTvShows}  />
                                 </View>
                             )}
                             {/* Family Movies */}
                             {familyMovies && (
                                 <View style={styles.carousel} >
-                                    <MovieList title={"Family movies"} content={familyMovies} />
+                                    <MovieList title={"Family movies"} content={familyMovies}/>
                                 </View>
                             )}
                             {/* Documentaries */}
                             {documentaries && (
                                 <View style={styles.carousel} >
-                                    <MovieList title={"Documentaries"} content={documentaries} />
+                                    <MovieList title={"Documentaries"} content={documentaries}  />
                                 </View>
                             )}
 

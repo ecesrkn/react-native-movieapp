@@ -5,7 +5,7 @@ import React from 'react'
 
 export class MovieList extends React.PureComponent<{
     title: string, 
-    content: Movie[]
+    content: Movie[],
 }> {
     render() {
         const { title, content } = this.props
@@ -18,7 +18,7 @@ export class MovieList extends React.PureComponent<{
                     data={content}
                     horizontal
                     renderItem={({ item }) =>
-                        <Card movie={item} />
+                        <Card movie={item}  />
                     }
                 />
             </View>
@@ -28,7 +28,7 @@ export class MovieList extends React.PureComponent<{
 
 export class TvShowList extends React.PureComponent<{
     title: string, 
-    content: TVShow[]
+    content: TVShow[],
 }> {
     render() {
         const { title, content } = this.props
@@ -41,7 +41,7 @@ export class TvShowList extends React.PureComponent<{
                     data={content}
                     horizontal
                     renderItem={({ item }) =>
-                        <Card tvShow={item} />
+                        <Card tvShow={item}/>
                     }
                 />
             </View>

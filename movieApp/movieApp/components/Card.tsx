@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native"
 import { Movie, TVShow } from "../data/types"
+import { useNavigation } from '@react-navigation/native';
 
 type CardProps = {
     movie?: Movie,
@@ -10,9 +11,13 @@ type CardItem = {
     poster_path: string,
     title: string
 }
+
+
+
 const placeholderImage = require("../assets/images/placeholder.jpg")
 
 export default function Card({ movie, tvShow }: CardProps) {
+    const navigation = useNavigation()
     const item: CardItem = movie
         ? {
             poster_path: movie.poster_path,
@@ -23,7 +28,7 @@ export default function Card({ movie, tvShow }: CardProps) {
             title: tvShow!.name
         }
     return (
-        <TouchableOpacity style={styles.contianer}>
+        <TouchableOpacity style={styles.contianer} onPress={() => navigation.navigate("Detail", {type: movie ? "movie" : "tv", id: movie ? movie.id : tvShow!.id})} >
             <Image
                 style={styles.image}
                 source={
