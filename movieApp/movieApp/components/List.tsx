@@ -58,10 +58,11 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 20,
         fontWeight: "bold",
-        paddingBottom: 20
+        paddingBottom: 20,
+        color: "#e4e4e4"
     },
     list: {
-        marginTop: 25,
+        marginVertical: 12,
 
-    }
+    },
 })

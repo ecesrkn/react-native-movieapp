@@ -38,3 +38,16 @@ export async function getDocumentaries(): Promise<Movie[]> {
     return result.data.results;
 
 }
+
+
+export async function getMovieDetail(id: number): Promise<Movie> {
+    const result = await axios.get(`${BASE_URL}/movie/${id}?${API_KEY}`)
+    return result.data as Movie;
+
+}
+
+export async function getTvDetail(id: number): Promise<TVShow> {
+    const result = await axios.get(`${BASE_URL}/tv/${id}?${API_KEY}`)
+    return result.data as TVShow;
+
+}

@@ -67,7 +67,7 @@ export default function Home({ navigation }: Props): JSX.Element {
                 ? <ErrorPage message1={error.name} message2={error.message} />
                 : <>
                     {loaded
-                        ? <ScrollView>
+                        ? <ScrollView style={styles.main}>
                             {/* Upcoming Movies - Big Swiper */}
                             {moviesImages && (
                                 <View style={styles.sliderContainer} >
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     swiper: {
-        // marginTop: 20
+        // margin: 5
     },
     noDot: {
         height: 0
@@ -152,5 +152,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center"
+    },
+    main: {
+        backgroundColor: "#2a2a2a"
     }
 });
