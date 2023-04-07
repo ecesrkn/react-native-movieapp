@@ -92,25 +92,25 @@ export default function Home({ navigation }: Props): JSX.Element {
                             {/* Popular Movies */}
                             {popularMovies && (
                                 <View style={styles.carousel} >
-                                    <MovieList title={"Popular movies"} content={popularMovies} />
+                                    <MovieList navigation={navigation} title={"Popular movies"} content={popularMovies} />
                                 </View>
                             )}
                             {/* Popular TV Shows */}
                             {popularTvShows && (
                                 <View style={styles.carousel} >
-                                    <TvShowList title={"Popular TV shows"} content={popularTvShows}  />
+                                    <TvShowList navigation={navigation} title={"Popular TV shows"} content={popularTvShows}  />
                                 </View>
                             )}
                             {/* Family Movies */}
                             {familyMovies && (
                                 <View style={styles.carousel} >
-                                    <MovieList title={"Family movies"} content={familyMovies}/>
+                                    <MovieList navigation={navigation} title={"Family movies"} content={familyMovies}/>
                                 </View>
                             )}
                             {/* Documentaries */}
                             {documentaries && (
                                 <View style={styles.carousel} >
-                                    <MovieList title={"Documentaries"} content={documentaries}  />
+                                    <MovieList navigation={navigation} title={"Documentaries"} content={documentaries}  />
                                 </View>
                             )}
 

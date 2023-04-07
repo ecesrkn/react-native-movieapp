@@ -1,10 +1,13 @@
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native"
 import { Movie, TVShow } from "../data/types"
 import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from "../navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type CardProps = {
     movie?: Movie,
     tvShow?: TVShow,
+    navigation: NativeStackNavigationProp<RootStackParamList, "Home">
 }
 
 type CardItem = {
@@ -16,8 +19,7 @@ type CardItem = {
 
 const placeholderImage = require("../assets/images/placeholder.jpg")
 
-export default function Card({ movie, tvShow }: CardProps) {
-    const navigation = useNavigation()
+export default function Card({ movie, tvShow, navigation }: CardProps) {
     const item: CardItem = movie
         ? {
             poster_path: movie.poster_path,
