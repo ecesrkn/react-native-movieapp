@@ -1,5 +1,5 @@
 import axios from "axios"
-import { Movie, TVShow } from "./types";
+import { Genre, Movie, TVShow } from "./types";
 
 
 const API_KEY = "api_key=41e409a3cf79fdd5cd7dae4026f0f83f"
@@ -40,14 +40,26 @@ export async function getDocumentaries(): Promise<Movie[]> {
 }
 
 
-export async function getMovieDetail(id: number): Promise<Movie> {
+export async function getMovieDetail(id: number): Promise<{
+    movie: Movie,
+    genres: Genre[]
+}> {
     const result = await axios.get(`${BASE_URL}/movie/${id}?${API_KEY}`)
-    return result.data as Movie;
+    return {
+        movie: result.data as Movie,
+        genres: result.data.genres
+    };
 
 }
 
-export async function getTvDetail(id: number): Promise<TVShow> {
+export async function getTvDetail(id: number): Promise<{
+    tvShow: TVShow,
+    genres: Genre[]
+}> {
     const result = await axios.get(`${BASE_URL}/tv/${id}?${API_KEY}`)
-    return result.data as TVShow;
+    return {
+        tvShow: result.data as TVShow,
+        genres: result.data.genres
+    };
 
 }

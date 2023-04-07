@@ -25,3 +25,8 @@ interface Screenplay {
   vote_average: number,
   vote_count: number
 }
+
+export type Genre = {
+  name: string,
+  id: number
+}
