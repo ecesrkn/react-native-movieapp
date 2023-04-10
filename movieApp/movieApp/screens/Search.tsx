@@ -59,7 +59,7 @@ export default function Search({ navigation }: Props) {
     }
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{flex:1}}>
             <View style={styles.container}>
                 <View style={styles.form}>
                     <TextInput
@@ -82,9 +82,7 @@ export default function Search({ navigation }: Props) {
                 numColumns={3}
                 renderItem={({ item }: { item: ComposedListItem }) => renderCards(item)} />
 
-        <View style={{height: 150}}>
-                        <Text> hello world</Text>
-        </View>
+
         </SafeAreaView>
 
     )
