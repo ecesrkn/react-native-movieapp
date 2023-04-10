@@ -63,3 +63,17 @@ export async function getTvDetail(id: number): Promise<{
     };
 
 }
+
+// Search for Movie
+export async function searchMovie(query: string): Promise<Movie[]> {
+    const result = await axios.get(`${BASE_URL}/search/movie?${API_KEY}&page=1&query=${query}`)
+    return result.data.results;
+
+}
+
+// Search for Movie
+export async function searchTv(query: string): Promise<TVShow[]> {
+    const result = await axios.get(`${BASE_URL}/search/tv?${API_KEY}&page=1&query=${query}`)
+    return result.data.results;
+
+}

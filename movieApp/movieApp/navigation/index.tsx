@@ -3,13 +3,15 @@ import Home from "../screens/Home";
 import Detail from "../screens/Detail";
 import { NavigationContainer } from "@react-navigation/native";
 import NavigationBar from "../components/NavigationBar";
+import Search from "../screens/Search";
 
 
 
 
 export type RootStackParamList = {
     Home: undefined,
-    Detail: {type: "movie" | "tv", id: number},
+    Detail: { type: "movie" | "tv", id: number },
+    Search: undefined
 };
 
 
@@ -24,7 +26,7 @@ function RootNavigator() {
                 component={Home}
                 options={{
                     headerTransparent: true,
-                    header: ({navigation}) => <NavigationBar navigation={navigation} main />
+                    header: ({ navigation }) => <NavigationBar navigation={navigation} main />
                 }}
             />
             <Stack.Screen
@@ -32,7 +34,16 @@ function RootNavigator() {
                 component={Detail}
                 options={{
                     headerTransparent: true,
-                    header: ({navigation}) => <NavigationBar navigation={navigation} />
+                    header: ({ navigation }) => <NavigationBar navigation={navigation} />
+                }}
+            />
+
+            <Stack.Screen
+                name="Search"
+                component={Search}
+                options={{
+                    headerTransparent: true,
+                    header: ({ navigation }) => <NavigationBar navigation={navigation} />
                 }}
             />
         </Stack.Navigator>
