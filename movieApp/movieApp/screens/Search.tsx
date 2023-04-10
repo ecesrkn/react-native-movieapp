@@ -59,7 +59,7 @@ export default function Search({ navigation }: Props) {
     }
 
     return (
-        <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={styles.main}>
             <View style={styles.container}>
                 <View style={styles.form}>
                     <TextInput
@@ -73,7 +73,7 @@ export default function Search({ navigation }: Props) {
                     onPress={() => {
                         setQuery(searchBar)
                         Keyboard.dismiss()}}>
-                    <Icon name={'search-outline'} size={30} />
+                    <Icon name={'search-outline'} size={30} color={"#e4e4e4"}/>
                 </TouchableOpacity>
             </View>
 
@@ -91,9 +91,11 @@ export default function Search({ navigation }: Props) {
 const styles = StyleSheet.create({
     input: {
         borderRadius: 15,
-        borderWidth: 0.5,
+        borderWidth: 0.8,
         height: 50,
         padding: 8,
+        color: "#e4e4e4",
+        borderColor: "#e4e4e4"
     },
     container: {
         padding: 10,
@@ -116,5 +118,10 @@ const styles = StyleSheet.create({
         padding: 10,
         color: "grey"
     },
+    main: {
+        flex:1,
+        backgroundColor: "#2a2a2a",
+        alignItems: "center"
+    }
 
 });
