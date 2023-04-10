@@ -11,6 +11,7 @@ import PlayButton from "../components/PlayButton";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import VideoPlayer from "react-native-video-controls"
+import Video from "../components/Video";
 
 const dimensions = Dimensions.get("screen")
 type Props = NativeStackScreenProps<RootStackParamList, 'Detail'>;
@@ -95,18 +96,12 @@ export default function Detail({ navigation, route }: Props) {
                 </View>
             </ScrollView>
                 <Modal
+                    supportedOrientations={["portrait", "landscape"]}
                     animationType="slide"
                     visible={modalVisible}
                 >
                     <View style={styles.container}>
-                        <VideoPlayer source={{
-                            uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                        }}
-                            // navigator={navigation}
-                            onBack={() => setModalVisible(false)} />
-                        <TouchableOpacity onPress={() => setModalVisible(false)}>
-                            <Text>Close modal</Text>
-                        </TouchableOpacity>
+                        <Video onClose={() => setModalVisible(false)}  />
                     </View>
 
                 </Modal>
