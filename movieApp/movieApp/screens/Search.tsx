@@ -65,6 +65,7 @@ export default function Search({ navigation }: Props) {
                     <TextInput
                         style={styles.input}
                         placeholder={'Search Movie or TV Show'}
+                        placeholderTextColor={"grey"}
                         onChangeText={setSearchBar}
                         value={searchBar}
                     />
